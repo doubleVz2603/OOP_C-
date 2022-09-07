@@ -115,12 +115,19 @@ public:
 
     void searchFullName(string fullName)
     {
+        int count= 0;
         for (int i = 0; i < listOfficer.size(); i++)
         {
             if (listOfficer[i]->getFullName().compare(fullName) == 0)
             {
                 listOfficer[i]->show();
+                ++count;
+                break;
             }
+        }
+        if(count == 0)
+        {
+            cout<<"not found"<<endl;
         }
     }
 
