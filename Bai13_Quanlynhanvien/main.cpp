@@ -6,13 +6,78 @@
 #include <iostream>
 
 using namespace std;
- 
- 
+
+void input(Management &management)
+{
+    char yes_no;
+    string inChoice;
+    system("CLS");
+    cout << "1. Intern" << endl;
+    cout << "2. Fresher" << endl;
+    cout << "3. Experience" << endl;
+    cout << "4. Back" << endl;
+    try
+    {
+        cin >> inChoice;
+        if (inChoice.length() > 1 || (int(inChoice[0] - 48) < 1 || int(inChoice[0] - 48) > 4))
+        {
+            throw "error format input...";
+        }
+        else
+        {
+            if (int(inChoice[0] - 48) == 4)
+            {
+                throw 101;
+            }
+
+            system("CLS");
+            if (int(inChoice[0] - 48) == 1)
+            {             
+                Employee *employee = new Intern();
+                employee->input();
+                management.add(*employee);
+                system("CLS");
+            }
+            else if (int(inChoice[0] - 48) == 2)
+            {
+                Employee *employee = new Fresher();
+                employee->input();
+                management.add(*employee);
+                system("CLS");
+            }
+            else if (int(inChoice[0] - 48) == 3)
+            {
+                Employee *employee = new Experience();
+                employee->input();
+                management.add(*employee);
+                system("CLS");
+            }
+            Employee::setEmployeeCount();
+        }
+        cout << "Keep adding employee? y/n" << endl;
+        cin >> yes_no;
+        if (yes_no == 'y')
+        {
+            input(management);
+        }
+        else
+        {
+            cout << "this phase add " << Employee::getEmployeeCount()<<" employee." << endl;
+            Employee::resetEmployeeCount();
+        }
+    }
+    catch (const char *msg)
+    {
+        cout << msg << endl;
+    }
+    catch(int)
+    {}
+}
+
 void menu()
 {
     string mainChoice, inChoice;
-    int ID, graduation_date, expInYear;
-    string fullName, email, phone, birthDay, majors, semester, university_name, graduation_rank, graduation_education, proSkill;
+    int ID;
     Management management;
     while (1)
     {
@@ -38,83 +103,9 @@ void menu()
             {
             case 1:
             {
-                system("CLS");
-                cout << "1. Intern" << endl;
-                cout << "2. Fresher" << endl;
-                cout << "3. Experience" << endl;
-                cout << "4. Back" << endl;
-                try
-                {
-                    cin >> inChoice;
-                    if (inChoice.length() > 1 || (int(inChoice[0] - 48) < 1 || int(inChoice[0] - 48) > 4))
-                    {
-                        throw "error format input...";
-                    }
-                    else
-                    {
-                        if (int(inChoice[0] - 48) == 4)
-                        {
-                            break;
-                        }
-
-                        system("CLS");
-                        cout << "ID: ";
-                        cin >> ID;
-                        fflush(stdin);
-                        cout << "full name: ";
-                        getline(cin, fullName);
-                        cout << "email: ";
-                        cin >> email;
-                        cout << "phone: ";
-                        cin >> phone;
-                        cout << "birth day: ";
-                        cin >> birthDay;
-                        if (int(inChoice[0] - 48) == 1)
-                        {
-                            cout << "majors: ";
-                            cin >> majors;
-                            cout << "semester: ";
-                            cin >> semester;
-                            cout << "university's name: ";
-                            cin >> university_name;
-                            Employee *employee = new Intern(majors, semester, university_name, ID, fullName, email, phone, birthDay, intern);
-                            management.add(*employee);
-                            system("CLS");
-                        }
-                        else if (int(inChoice[0] - 48) == 2)
-                        {
-
-                            cout << "graduation date: ";
-                            cin >> graduation_date;
-                            cout << "graduation rank: ";
-                            cin >> graduation_rank;
-                            cout << "graduation education: ";
-                            cin >> graduation_education;
-                            Employee *employee = new Fresher(graduation_date, graduation_rank, graduation_education, ID, fullName, email, phone, birthDay, fresher);
-                            management.add(*employee);
-                            system("CLS");
-                        }
-                        else if (int(inChoice[0] - 48) == 3)
-                        {
-
-                            cout << "expInYear: ";
-                            cin >> expInYear;
-                            fflush(stdin);
-                            cout << "proSkill: ";
-                            getline(cin, proSkill);
-                            Employee *employee = new Experience(expInYear, proSkill, ID, fullName, email, phone, birthDay, experience);
-                            management.add(*employee);
-                            system("CLS");
-                        }
-                    }
-                }
-                catch (const char *msg)
-                {
-                    cout << msg << endl;
-                    cout << "back to menu press 0" << endl;
-                    cin >> inChoice;
-                }
-
+                input(management);
+                cout << "press 0 to back to menu...";
+                cin >> inChoice;
                 break;
             }
             case 2:

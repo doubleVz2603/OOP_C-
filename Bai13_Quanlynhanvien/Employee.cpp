@@ -1,5 +1,6 @@
 #include "Employee.h"
 
+
 Employee ::Employee() {}
 Employee ::Employee(int ID, string fullName, string email, string phone, string birthDay, EmployeeType employee_type)
 {
@@ -39,7 +40,10 @@ int Employee::getEmployeeCount()
 {
     return employee_count;
 }
-
+vector<Certificate> Employee::getListCertificate()
+{
+    return listCertificate;
+}
 
 void Employee::setID(int ID)
 {
@@ -51,18 +55,30 @@ void Employee::setFullName(string fullName)
 }
 void Employee::setEmail(string email)
 {
-    this->ID = ID;
+    this->email = email;
 }
 void Employee::setPhone(string phone)
 {
     this->phone = phone;
 }
-void Employee::setBirthDay(string birthday)
+void Employee::setBirthDay(string birthDay)
 {
     this->birthDay = birthDay;
 }
+void Employee::setEmployeeCount()
+{
+    ++employee_count;
+}
+void Employee::resetEmployeeCount()
+{
+    employee_count = 0;
+}
+void Employee::setListCertificate(Certificate certificate)
+{
+    this->listCertificate.push_back(certificate);
+}
 
 
-void Employee::update() {}
 void Employee::showInfo() {}
+void Employee::input(){}
 int Employee::employee_count;

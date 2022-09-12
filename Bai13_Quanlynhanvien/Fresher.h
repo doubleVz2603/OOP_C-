@@ -13,6 +13,7 @@ public:
     Fresher();
     Fresher(int, string, string, int, string, string, string, string, EmployeeType);
     void showInfo();
-    void update();
+    
+    void input();
 };
 #endif

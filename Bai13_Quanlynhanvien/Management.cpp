@@ -35,7 +35,7 @@ void Management::removeByID(int ID)
     }
     if (count == 0)
     {
-        cout << "no found" << endl;
+        cout << "not found" << endl;
     }
 }
 void Management::update(int ID)
@@ -45,7 +45,7 @@ void Management::update(int ID)
     {
         if(listEmployee[i]->getID() == ID)
         {
-            listEmployee[i]->update();
+            listEmployee[i]->input();
             exist = true;
             break;
         }

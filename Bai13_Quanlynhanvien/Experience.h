@@ -8,11 +8,11 @@ class Experience : public Employee
 private:
     int expInYear;
     string proSkill;
-    //Employee_type,Employee_count
+    
 public:
     Experience();
     Experience(int, string, int, string, string, string, string, EmployeeType);
     void showInfo();
-    void update();
+    void input();
 };
 #endif
