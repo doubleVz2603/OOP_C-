@@ -29,6 +29,7 @@ void Management::removeByID(int ID)
         if (listEmployee[i]->getID() == ID)
         {
             listEmployee.erase(index);
+            cout<<"employee was removed."<<endl;
             ++count;
             break;
         }
@@ -66,4 +67,9 @@ void Management::showByType(EmployeeType employee_type)
         }
     }
     
+}
+
+vector<Employee*> Management::getListEmployee()
+{
+    return listEmployee;
 }

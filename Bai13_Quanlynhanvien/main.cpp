@@ -32,7 +32,7 @@ void input(Management &management)
 
             system("CLS");
             if (int(inChoice[0] - 48) == 1)
-            {             
+            {
                 Employee *employee = new Intern();
                 employee->input();
                 management.add(*employee);
@@ -62,16 +62,17 @@ void input(Management &management)
         }
         else
         {
-            cout << "this phase add " << Employee::getEmployeeCount()<<" employee." << endl;
+            cout << "this phase add " << Employee::getEmployeeCount() << " employee." << endl;
             Employee::resetEmployeeCount();
         }
     }
-    catch (const char *msg)
+    catch (const char *error)
     {
-        cout << msg << endl;
+        cout << error << endl;
     }
-    catch(int)
-    {}
+    catch (int)
+    {
+    }
 }
 
 void menu()
@@ -200,6 +201,13 @@ void menu()
             }
         }
     }
+
+    for (int i = 0; i < management.getListEmployee().size(); i++)
+    {
+        delete management.getListEmployee()[i];
+        management.getListEmployee()[i] = NULL;
+    }
+    
 }
 int main()
 {

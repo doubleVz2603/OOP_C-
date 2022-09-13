@@ -11,7 +11,7 @@ private:
     
 public:
     Experience();
-    Experience(int, string, int, string, string, string, string, EmployeeType);
+    Experience(int, string, int, string, string, string, Date, EmployeeType);
     void showInfo();
     void input();
 };

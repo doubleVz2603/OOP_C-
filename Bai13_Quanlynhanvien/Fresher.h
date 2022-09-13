@@ -3,6 +3,7 @@
 #include "Employee.h"
 #include <iostream>
 using namespace std;
+
 class Fresher : public Employee
 {
 private:
@@ -11,7 +12,7 @@ private:
     
 public:
     Fresher();
-    Fresher(int, string, string, int, string, string, string, string, EmployeeType);
+    Fresher(int, string, string, int, string, string, string, Date, EmployeeType);
     void showInfo();
     
     void input();

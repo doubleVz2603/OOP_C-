@@ -1,28 +1,8 @@
+
 #include "Experience.h"
 
-void phoneException(string phone)
-{
-    if (phone.length() != 10)
-    {
-        throw "phone number isn't length enough...";
-    }
-    else
-    {
-        if ((int(phone[0]) - 48) != 0)
-        {
-            throw "error format input...";
-        }
-        for (int i = 1; i < phone.length(); i++)
-        {
-            if ((int(phone[i]) - 48) < 0 || (int(phone[i]) - 48) > 9)
-            {
-                throw "error format input...";
-            }
-        }
-    }
-}
 Experience ::Experience() {}
-Experience ::Experience(int expInYear, string proSkill, int ID, string fullName, string email, string phone, string birthDay, EmployeeType employee_type)
+Experience ::Experience(int expInYear, string proSkill, int ID, string fullName, string email, string phone, Date birthDay, EmployeeType employee_type)
     : Employee(ID, fullName, email, phone, birthDay, employee_type)
 {
     this->expInYear = expInYear;
@@ -33,11 +13,11 @@ void Experience ::showInfo()
 {
     cout << "expInYear: " << expInYear << endl;
     cout << "proSkill: " << proSkill << endl;
-    cout << "ID: " << Employee::getID() << endl;
-    cout << "full name: " << Employee ::getFullName() << endl;
-    cout << "email: " << Employee ::getEmail() << endl;
-    cout << "phone: " << Employee::getPhone() << endl;
-    cout << "birth day: " << Employee ::getBirthDay() << endl;
+    cout << "ID: " << this->getID() << endl;
+    cout << "full name: " << this->getFullName() << endl;
+    cout << "email: " << this->getEmail() << endl;
+    cout << "phone: " << this->getPhone() << endl;
+    cout << "birth day: " << this->getBirthDay().getDay() << "/" << this->getBirthDay().getMonth() << "/" << this->getBirthDay().getYear() << endl;
     cout << "he/she has " << this->getListCertificate().size() << " certificate: " << endl;
     for (int i = 0; i < this->getListCertificate().size(); i++)
     {
@@ -54,15 +34,37 @@ void Experience::input()
     int certificatedID;
     string certificatedName, certificatedRank, certificatedDate;
     int ID, number_certificate;
-    string fullName, email, phone, birthDay;
+    string fullName, email, phone, day, month, year;
     cout << "ID: ";
     cin >> ID;
-    fflush(stdin);
-    cout << "full name: ";
-    getline(cin, fullName);
-    cout << "email: ";
-    cin >> email;
-again:
+emailAgain:
+    try
+    {
+        cout << "email: ";
+        cin >> email;
+        emailException(email);
+    }
+    catch (const char *error)
+    {
+        cout << error << endl;
+        goto emailAgain;
+    }
+
+nameAgain:
+    try
+    {
+        fflush(stdin);
+        cout << "full name: ";
+        getline(cin, fullName);
+        fullNameException(fullName);
+    }
+    catch (const char *error)
+    {
+        cout << error << endl;
+        goto nameAgain;
+    }
+
+phoneAgain:
     try
     {
         cout << "phone: ";
@@ -72,11 +74,26 @@ again:
     catch (const char *error)
     {
         cout << error << endl;
-        goto again;
+        goto phoneAgain;
     }
-
-    cout << "birth day: ";
-    cin >> birthDay;
+birthDayAgain:
+    try
+    {
+        cout << "birth day: " << endl;
+        cout << "day: ";
+        cin >> day;
+        cout << "month: ";
+        cin >> month;
+        cout << "year: ";
+        cin >> year;
+        dateException(day, month, year);
+    }
+    catch (const char *error)
+    {
+        cout << error << endl;
+        goto birthDayAgain;
+    }
+    Date birthDay(day, month, year);
     cout << "expInYear: ";
     cin >> expInYear;
     fflush(stdin);

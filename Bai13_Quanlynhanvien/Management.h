@@ -15,5 +15,6 @@ public:
     void removeByID(int);
     void update(int);
     void showByType(EmployeeType);
+    vector<Employee*> getListEmployee();
 };
 #endif
